@@ -26,6 +26,7 @@
 */
 
 #include <stdio.h>
+#include <FastLED.h>
 
 #include "driver/ledc.h"
 #include "esp_log.h"
@@ -43,6 +44,9 @@ typedef struct hsp {
     uint16_t b;  // 0-100
 } hsp_t;
 
+#define NUM_LEDS 5
+#define DATA_PIN 6
+
 /* LED numbers below are for ESP-WROVER-KIT */
 /* Red LED */
 #define LEDC_IO_0 (0)
@@ -59,6 +63,10 @@ static uint16_t s_brightness;
 static bool s_on = false;
 
 static const char *TAG = "lightbulb";
+
+CRGB leds[NUM_LEDS]
+
+FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
 
 /**
  * @brief transform lightbulb's "RGB" and other parameter
